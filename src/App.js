@@ -85,7 +85,14 @@ function App() {
   console.log({ shiftHoursPerDay });
 
   const TableBodyRows = cheatData.map((weeklySchedule, index) => {
+    console.log({ weeklySchedule });
     // Need total hours per week for each employee.
+    const employeeHoursThisWeek = weeklySchedule.shifts
+      .map((shift) => {
+        return shift.duration;
+      })
+      .reduce(reducer);
+    console.log({ employeeHoursThisWeek });
 
     const TableDataShifts = dayNames.map((day, index) => {
       return (
@@ -98,10 +105,11 @@ function App() {
       );
     });
 
-    console.log({ weeklySchedule });
     return (
       <tr key={weeklySchedule.name}>
-        <td>{weeklySchedule.name}</td>
+        <td>
+          {weeklySchedule.name} ({employeeHoursThisWeek} hrs)
+        </td>
         {TableDataShifts}
       </tr>
     );
@@ -127,17 +135,16 @@ function App() {
             <option value="last_name">Last Name</option>
           </select>
         </div>
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                {TableHeaderRow}
-              </tr>
-            </thead>
-            <tbody>{TableBodyRows}</tbody>
-          </table>
-        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {TableHeaderRow}
+            </tr>
+          </thead>
+          <tbody>{TableBodyRows}</tbody>
+        </table>
       </div>
     </div>
   );

@@ -13,17 +13,11 @@ code {
 }
 
 .schedule-container {
-  /* margin-left: auto;
-  margin-right: auto; */
-  padding-left: 10rem;
-  padding-right: 10rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: auto;
 }
 
 .input-group {
-  align-self: start;
+  text-align: left;
   margin-bottom: 1rem;
 }
 
@@ -31,13 +25,10 @@ code {
   margin-right: 0.5rem;
 }
 
-.table-container {
-  display: flex;
-}
-
 table {
   border: 1px solid lightgray;
   border-collapse: collapse;
+  margin: auto;
 }
 
 table thead {
