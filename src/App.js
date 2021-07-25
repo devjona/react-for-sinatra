@@ -1,26 +1,27 @@
 // import logo from './logo.svg';
 import "./App.css";
+import SingleShift from "./components/SingleShift";
+import { cheatData } from "./test-data/cheatData";
 
 function App() {
   const name = "Manager";
-  const url = "http://localhost:4567";
+  // const url = "http://localhost:4567";
 
-  const myHeaders = new Headers();
+  // const myHeaders = new Headers();
   // // console.log({ myHeaders });
   // // myHeaders.append("Content-Type", "application/json");
   // // myHeaders.append("Accept", "application/json");
-  myHeaders.append("Access-Control-Allow-Origin", "http://localhost:3000");
+  // myHeaders.append("Access-Control-Allow-Origin", "http://localhost:3000");
   // myHeaders.append("Content-Type", "application/json");
   // myHeaders.append("Allow", "GET, POST, OPTIONS");
   // // myHeaders.append("Accept", "*");
-  const myInit = {
-    // method: "GET",
-    // method: "POST",
-    // headers: myHeaders,
-    // mode: "cors",
-    mode: "no-cors",
-    //   // cache: "default",
-  };
+  // const myInit = {
+  // method: "GET",
+  // headers: myHeaders,
+  // mode: "cors",
+  // mode: "no-cors",
+  //   // cache: "default",
+  // };
 
   // console.log({ myInit });
   // let shiftsJSON;
@@ -46,123 +47,8 @@ function App() {
   //   })
   //   .then((data) => console.log("CAT data: ", data));
 
-  const cheatData = [
-    {
-      name: "Alfred Brown",
-      shifts: [
-        {
-          day: 0,
-          start_at: "12pm",
-          end_at: "5pm",
-          duration: 5,
-          role: "Server",
-          color: "red",
-        },
-        {
-          day: 1,
-          start_at: "9am",
-          end_at: "12pm",
-          duration: 3,
-          role: "Host",
-          color: "green",
-        },
-        {
-          day: 3,
-          start_at: "9am",
-          end_at: "4pm",
-          duration: 7,
-          role: "Server",
-          color: "red",
-        },
-        {
-          day: 5,
-          start_at: "9am",
-          end_at: "2pm",
-          duration: 5,
-          role: "Host",
-          color: "green",
-        },
-      ],
-    },
-    {
-      name: "Tim Cannady",
-      shifts: [
-        {
-          day: 0,
-          start_at: "11am",
-          end_at: "6pm",
-          duration: 7,
-          role: "Chef",
-          color: "orange",
-        },
-        {
-          day: 1,
-          start_at: "9am",
-          end_at: "3pm",
-          duration: 6,
-          role: "Dishwasher",
-          color: "purple",
-        },
-        {
-          day: 2,
-          start_at: "9am",
-          end_at: "1pm",
-          duration: 4,
-          role: "Chef",
-          color: "orange",
-        },
-        {
-          day: 5,
-          start_at: "9pm",
-          end_at: "4am",
-          duration: 7,
-          role: "Dishwasher",
-          color: "purple",
-        },
-      ],
-    },
-    {
-      name: "Jeff Auston",
-      shifts: [
-        {
-          day: 1,
-          start_at: "11am",
-          end_at: "6pm",
-          duration: 7,
-          role: "Chef",
-          color: "orange",
-        },
-        {
-          day: 2,
-          start_at: "9am",
-          end_at: "3pm",
-          duration: 6,
-          role: "Dishwasher",
-          color: "purple",
-        },
-        {
-          day: 4,
-          start_at: "9am",
-          end_at: "1pm",
-          duration: 4,
-          role: "Chef",
-          color: "orange",
-        },
-        {
-          day: 6,
-          start_at: "9am",
-          end_at: "4pm",
-          duration: 7,
-          role: "Dishwasher",
-          color: "purple",
-        },
-      ],
-    },
-  ];
-
   const allShifts = [];
   cheatData.forEach((employee) => {
-    console.log("employee: ", employee);
     allShifts.push(employee.shifts);
   });
   const allShiftsConcatSorted = Array.prototype
@@ -195,14 +81,8 @@ function App() {
 
   console.log({ shiftHoursPerDay });
 
-  // console.log(shiftHoursPerDaySummed);
-
-  // const totalHoursPerDay = allShiftsByDay.map(day => {
-
-  // })
-
-  const AllSchedules = cheatData.map((weeklySchedule) => {
-    console.log(weeklySchedule);
+  const TableBodyRows = cheatData.map((weeklySchedule, index) => {
+    console.log({ weeklySchedule });
     return (
       <tr key={weeklySchedule.name}>
         <td>{weeklySchedule.name}</td>
@@ -221,7 +101,7 @@ function App() {
 
   const TableHeaderRow = shiftHoursPerDay.map((day, index) => {
     return (
-      <th>
+      <th key={index}>
         {dayNames[index]} ({day} hrs)
       </th>
     );
@@ -231,21 +111,19 @@ function App() {
     <div className="App">
       <h1>Hey there, {name}!</h1>
       <h2>Schedules:</h2>
+      <label htmlFor="sort-by">Sort by</label>
+      <select name="sort-by" id="select-sort-type">
+        <option value="first_name">First Name</option>
+        <option value="last_name">Last Name</option>
+      </select>
       <table>
         <thead>
           <tr>
             <th></th>
             {TableHeaderRow}
-            {/* <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th> */}
           </tr>
         </thead>
-        <tbody>{AllSchedules}</tbody>
+        <tbody>{TableBodyRows}</tbody>
       </table>
     </div>
   );

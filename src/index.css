@@ -33,3 +33,16 @@ table tbody tr td {
   border: 1px solid blue;
   padding: 0.5rem;
 }
+
+.shift-role-color-red {
+  background-color: red;
+}
+.shift-role-color-purple {
+  background-color: purple;
+}
+.shift-role-color-orange {
+  background-color: orange;
+}
+.shift-role-color-green {
+  background-color: green;
+}
