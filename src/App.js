@@ -81,23 +81,30 @@ function App() {
 
   console.log({ shiftHoursPerDay });
 
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   const TableBodyRows = cheatData.map((weeklySchedule, index) => {
+    // Need total hours per week for each employee.
+
+    const TableDataShifts = dayNames.map((day, index) => {
+      return (
+        <SingleShift
+          key={index}
+          name={dayNames[index]}
+          dayOfWeekIndex={index}
+          shifts={weeklySchedule.shifts}
+        />
+      );
+    });
+
     console.log({ weeklySchedule });
     return (
       <tr key={weeklySchedule.name}>
         <td>{weeklySchedule.name}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        {TableDataShifts}
       </tr>
     );
   });
-
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const TableHeaderRow = shiftHoursPerDay.map((day, index) => {
     return (
