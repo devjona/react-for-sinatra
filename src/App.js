@@ -3,12 +3,9 @@ import "./App.css";
 import React, { Component } from "react";
 import TableHeader from "./components/TableHeader";
 import TableBody from "./components/TableBody";
-import SingleShift from "./components/SingleShift";
 import { cheatData } from "./test-data/cheatData";
 import reducer from "./js/reducer";
-// import { render } from "@testing-library/react";
 
-// function App() {
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +16,6 @@ class App extends Component {
       userName: "Manager",
       shiftHoursPerDay: [],
     };
-
-    this.dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    // this.reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     // bind to this:
     this.prepDataForSchedule = this.prepDataForSchedule.bind(this);
@@ -74,9 +68,6 @@ class App extends Component {
   //   .then((data) => console.log("CAT data: ", data));
 
   prepDataForSchedule() {
-    // const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    // We'll use this to sum up hours per week/employee or hours/day-all shifts.
-    // const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let allShiftsByDay = [];
 
     const allShifts = [];
@@ -178,10 +169,7 @@ class App extends Component {
           </div>
 
           <table>
-            <TableHeader
-              dayNames={this.dayNames}
-              shiftHoursPerDay={this.state.shiftHoursPerDay}
-            />
+            <TableHeader shiftHoursPerDay={this.state.shiftHoursPerDay} />
             <TableBody schedules={this.state.data} />
           </table>
         </div>

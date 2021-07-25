@@ -1,8 +1,10 @@
+import dayNames from "../js/dayNames";
+
 const TableHeader = (props) => {
   // some stuff
   console.log({ props });
 
-  const thCells = props.dayNames.map((day, index) => {
+  const thCells = dayNames.map((day, index) => {
     return (
       <th key={index}>
         {day} ({props.shiftHoursPerDay[index]}hrs)

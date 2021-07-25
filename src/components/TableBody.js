@@ -5,18 +5,15 @@ const TableBody = (props) => {
   const tableRows = props.schedules.map((schedule) => {
     const hoursThisWeek = schedule.shifts
       .map((shift) => {
-        console.log({ shift });
         return shift.duration;
       })
       .reduce(reducer);
 
-    console.log({ hoursThisWeek });
-
     return (
       <TableRow
         key={schedule.name}
-        name={schedule.name}
         hoursThisWeek={hoursThisWeek}
+        schedule={schedule}
       />
     );
   });
