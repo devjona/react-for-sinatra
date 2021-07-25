@@ -47,6 +47,10 @@ function App() {
   //   })
   //   .then((data) => console.log("CAT data: ", data));
 
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  // We'll use this to sum up hours per week/employee or hours/day-all shifts.
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
   const allShifts = [];
   cheatData.forEach((employee) => {
     allShifts.push(employee.shifts);
@@ -70,7 +74,6 @@ function App() {
   console.log({ allShiftsByDay });
 
   // A day has many shifts; each shift has a duration. We'll look at the duration of all shifts in a day, sum them, and return a new array that has the total of how many people-hours are being scheduled per day.
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
   const shiftHoursPerDay = allShiftsByDay.map((day) => {
     const shiftHours = [];
     day.forEach((shift) => {
@@ -80,8 +83,6 @@ function App() {
   });
 
   console.log({ shiftHoursPerDay });
-
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const TableBodyRows = cheatData.map((weeklySchedule, index) => {
     // Need total hours per week for each employee.
@@ -117,21 +118,27 @@ function App() {
   return (
     <div className="App">
       <h1>Hey there, {name}!</h1>
-      <h2>Schedules:</h2>
-      <label htmlFor="sort-by">Sort by</label>
-      <select name="sort-by" id="select-sort-type">
-        <option value="first_name">First Name</option>
-        <option value="last_name">Last Name</option>
-      </select>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            {TableHeaderRow}
-          </tr>
-        </thead>
-        <tbody>{TableBodyRows}</tbody>
-      </table>
+      <div className="schedule-container">
+        <h2>Schedules:</h2>
+        <div className="input-group">
+          <label htmlFor="sort-by">Sort by</label>
+          <select name="sort-by" id="select-sort-type">
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+          </select>
+        </div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                {TableHeaderRow}
+              </tr>
+            </thead>
+            <tbody>{TableBodyRows}</tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

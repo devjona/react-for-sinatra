@@ -4,9 +4,9 @@ const SingleShift = ({ name, dayOfWeekIndex, shifts }) => {
   });
 
   if (todaysShift) {
-    let roleColor = `shift-role-color-${todaysShift.color}`;
+    let shiftBlockClassName = `shift-role-color-${todaysShift.color} shift-block`;
     return (
-      <td className={roleColor}>
+      <td className={shiftBlockClassName}>
         <p>
           {todaysShift.start_at} - {todaysShift.end_at}
         </p>

@@ -12,8 +12,32 @@ code {
     monospace;
 }
 
+.schedule-container {
+  /* margin-left: auto;
+  margin-right: auto; */
+  padding-left: 10rem;
+  padding-right: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  align-self: start;
+  margin-bottom: 1rem;
+}
+
+.input-group > label {
+  margin-right: 0.5rem;
+}
+
+.table-container {
+  display: flex;
+}
+
 table {
-  border: 1px solid blue;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
 }
 
 table thead {
@@ -21,6 +45,7 @@ table thead {
 }
 
 table thead th {
+  border: 1px solid grey;
   padding: 1rem;
 }
 
@@ -28,12 +53,19 @@ table tbody {
   border: 1px solid orange;
 }
 
+table tbody tr {
+  border: 1px solid grey;
+}
+
 table tbody tr td {
-  background-color: azure;
-  border: 1px solid blue;
+  /* background-color: azure; */
+  border: 1px solid grey;
   padding: 0.5rem;
-  color: white;
   font-weight: bold;
+}
+
+td.shift-block {
+  color: white;
 }
 
 .shift-role-color-red {
