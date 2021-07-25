@@ -3,7 +3,11 @@ const TableHeader = (props) => {
   console.log({ props });
 
   const thCells = props.dayNames.map((day, index) => {
-    return <th key={index}>{day} ( hrs)</th>;
+    return (
+      <th key={index}>
+        {day} ({props.shiftHoursPerDay[index]}hrs)
+      </th>
+    );
   });
 
   return (

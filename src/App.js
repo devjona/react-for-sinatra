@@ -2,8 +2,10 @@
 import "./App.css";
 import React, { Component } from "react";
 import TableHeader from "./components/TableHeader";
+import TableBody from "./components/TableBody";
 import SingleShift from "./components/SingleShift";
 import { cheatData } from "./test-data/cheatData";
+import reducer from "./js/reducer";
 // import { render } from "@testing-library/react";
 
 // function App() {
@@ -19,12 +21,13 @@ class App extends Component {
     };
 
     this.dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    this.reducer = (accumulator, currentValue) => accumulator + currentValue;
+    // this.reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     // bind to this:
     this.prepDataForSchedule = this.prepDataForSchedule.bind(this);
 
     console.log("this in constructor: ", this);
+    console.log({ cheatData });
   }
 
   // const name = "Manager";
@@ -106,42 +109,44 @@ class App extends Component {
         day.forEach((shift) => {
           shiftHours.push(shift.duration);
         });
-        return shiftHours.reduce(this.reducer);
+        return shiftHours.reduce(reducer);
       }),
     });
 
     // console.log({ this.state.shiftHoursPerDay });
 
-    const TableBodyRows = cheatData.map((weeklySchedule, index) => {
-      console.log({ weeklySchedule });
-      // Need total hours per week for each employee.
-      const employeeHoursThisWeek = weeklySchedule.shifts
-        .map((shift) => {
-          return shift.duration;
-        })
-        .reduce(this.reducer);
-      console.log({ employeeHoursThisWeek });
+    // const TableBodyRows = cheatData.map((weeklySchedule, index) => {
+    //   console.log({ weeklySchedule });
+    //   // Need total hours per week for each employee.
+    //   const employeeHoursThisWeek = weeklySchedule.shifts
+    //     .map((shift) => {
+    //       return shift.duration;
+    //     })
+    //     .reduce(this.reducer);
+    //   console.log({ employeeHoursThisWeek });
 
-      const TableDataShifts = this.dayNames.map((day, index) => {
-        return (
-          <SingleShift
-            key={index}
-            name={this.dayNames[index]}
-            dayOfWeekIndex={index}
-            shifts={weeklySchedule.shifts}
-          />
-        );
-      });
+    // const TableDataShifts = this.dayNames.map((day, index) => {
+    //   return (
+    //     <SingleShift
+    //       key={index}
+    //       name={this.dayNames[index]}
+    //       dayOfWeekIndex={index}
+    //       shifts={weeklySchedule.shifts}
+    //     />
+    //   );
+    // });
 
-      return (
-        <tr key={weeklySchedule.name}>
-          <td>
-            {weeklySchedule.name} ({employeeHoursThisWeek} hrs)
-          </td>
-          {TableDataShifts}
-        </tr>
-      );
-    });
+    // return (
+    //   <tr key={weeklySchedule.name}>
+    //     <td>
+    //       {weeklySchedule.name} ({employeeHoursThisWeek} hrs)
+    //     </td>
+    //     {TableDataShifts}
+    //   </tr>
+    // );
+    // });
+
+    // console.log(TableBodyRows);
 
     // const TableHeaderRow = shiftHoursPerDay.map((day, index) => {
     //   return (
@@ -155,6 +160,7 @@ class App extends Component {
   componentDidMount() {
     console.log("componentDidMOUNT!");
     this.prepDataForSchedule();
+    console.log("data: ", this.state.data);
   }
 
   render() {
@@ -172,17 +178,11 @@ class App extends Component {
           </div>
 
           <table>
-            {/* <thead> */}
-            {/* <tr> */}
-            {/* <th></th> */}
-            {/* {TableHeaderRow} need to import this. */}
             <TableHeader
               dayNames={this.dayNames}
               shiftHoursPerDay={this.state.shiftHoursPerDay}
             />
-            {/* </tr> */}
-            {/* </thead> */}
-            <tbody>{/* {TableBodyRows} need to import this.*/}</tbody>
+            <TableBody schedules={this.state.data} />
           </table>
         </div>
       </div>
