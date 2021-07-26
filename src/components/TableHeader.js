@@ -3,7 +3,6 @@ import reducer from "../js/reducer";
 
 const TableHeader = (props) => {
   // re-work data to provide how many hours are scheduled per day among all employees:
-  console.log("prepping data");
   let allShiftsByDay = [];
 
   let allShifts = [];

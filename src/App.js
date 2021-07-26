@@ -4,25 +4,20 @@ import React, { Component } from "react";
 import TableHeader from "./components/TableHeader";
 import TableBody from "./components/TableBody";
 import { cheatData } from "./test-data/cheatData";
-import reducer from "./js/reducer";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      sort_by: "first_name",
       data: null,
       userName: "Manager",
     };
 
     // bind to this:
     this.fetchScheduleData = this.fetchScheduleData.bind(this);
-    this.sortbyFirstName = this.sortbyFirstName.bind(this);
-    this.sortbyLastName = this.sortbyLastName.bind(this);
-
-    console.log("this in constructor: ", this);
-    console.log({ cheatData });
+    this.sortByFirstOrLastName = this.sortByFirstOrLastName.bind(this);
+    this.onSelectHandler = this.onSelectHandler.bind(this);
   }
 
   // const url = "http://localhost:4567";
@@ -66,13 +61,38 @@ class App extends Component {
   //     return response.json();
   //   })
   //   .then((data) => console.log("CAT data: ", data));
-  sortbyFirstName() {}
+  onSelectHandler(e) {
+    let sortedSchedule;
+    if (e.target.value === "first_name") {
+      sortedSchedule = this.sortByFirstOrLastName(0, this.state.data);
+    }
+    if (e.target.value === "last_name") {
+      sortedSchedule = this.sortByFirstOrLastName(1, this.state.data);
+    }
 
-  sortbyLastName() {}
+    this.setState({ data: sortedSchedule });
+  }
+
+  sortByFirstOrLastName(int, data) {
+    const schedulesSortedByName = data.slice();
+    schedulesSortedByName.sort((a, b) => {
+      let nameA = a.name.split(" ")[int].toUpperCase();
+      let nameB = b.name.split(" ")[int].toUpperCase();
+
+      if (nameA > nameB) {
+        return 1;
+      }
+      if (nameA < nameB) {
+        return -1;
+      }
+      return 0;
+    });
+    return schedulesSortedByName;
+  }
 
   fetchScheduleData() {
-    console.log("going to fetch Data");
-    this.setState({ data: cheatData });
+    let sortedSchedule = this.sortByFirstOrLastName(0, cheatData);
+    this.setState({ data: sortedSchedule });
   }
 
   componentDidMount() {
@@ -89,7 +109,11 @@ class App extends Component {
             <h2>Schedules:</h2>
             <div className="input-group">
               <label htmlFor="sort-by">Sort by</label>
-              <select name="sort-by" id="select-sort-type">
+              <select
+                name="sort-by"
+                id="select-sort-type"
+                onChange={this.onSelectHandler}
+              >
                 <option value="first_name">First Name</option>
                 <option value="last_name">Last Name</option>
               </select>
