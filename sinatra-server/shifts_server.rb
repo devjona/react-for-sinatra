@@ -25,13 +25,13 @@ get '/' do
   'Hello world!'
 end
 
+# Another attempt at handling the 'pre-flight check' that happens with CORS, custom Headers.
 # options '/shifts' do
 #   # headers "Allow" => "GET, POST, OPTIONS"
 #   headers "Allow" => "*"
 #   # headers "Access-Control-Request-Method" => "GET"
 #   headers "Access-Control-Allow-Origin" => "http://localhost:3000"
 #   content_type :json
-#   "options request!"
 # end
 
 get '/shifts' do
