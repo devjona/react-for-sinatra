@@ -20,47 +20,45 @@ class App extends Component {
     this.onSelectHandler = this.onSelectHandler.bind(this);
   }
 
-  // const url = "http://localhost:4567";
+  // TODO: Having nasty CORS issues, can't get response from Sinatra despite all my attempts.
+  // testFetch() {
+  //   console.log("hi");
+  //   const url = "http://localhost:4567";
+  //   // const myHeaders = new Headers();
+  //   // // console.log({ myHeaders });
+  //   // // myHeaders.append("Content-Type", "application/json");
+  //   // // myHeaders.append("Accept", "application/json");
+  //   // myHeaders.append("Access-Control-Allow-Origin", "http://localhost:3000");
+  //   // myHeaders.append("Content-Type", "application/json");
+  //   // myHeaders.append("Allow", "GET, POST, OPTIONS");
+  //   // // myHeaders.append("Accept", "*");
+  //   const myInit = {
+  //     method: "GET",
+  //     // headers: myHeaders,
+  //     // mode: "cors",
+  //     // mode: "no-cors",
+  //     // cache: "default",
+  //   };
+  //   // console.log({ myInit });
+  //   // let shiftsJSON;
+  //   // fetch(`${url}/shifts`)
+  //   fetch(`${url}/shifts`, myInit)
+  //     .then((response) => {
+  //       console.log("response: ", response);
+  //       return response.json();
+  //     })
+  //     .then((data) => console.log("SHIFT data: ", data))
+  //     .catch((error) => console.log("error is: ", error));
 
-  // const myHeaders = new Headers();
-  // // console.log({ myHeaders });
-  // // myHeaders.append("Content-Type", "application/json");
-  // // myHeaders.append("Accept", "application/json");
-  // myHeaders.append("Access-Control-Allow-Origin", "http://localhost:3000");
-  // myHeaders.append("Content-Type", "application/json");
-  // myHeaders.append("Allow", "GET, POST, OPTIONS");
-  // // myHeaders.append("Accept", "*");
-  // const myInit = {
-  // method: "GET",
-  // headers: myHeaders,
-  // mode: "cors",
-  // mode: "no-cors",
-  //   // cache: "default",
-  // };
+  //   // CAT api
+  //   fetch("https://catfact.ninja/fact")
+  //     .then((response) => {
+  //       console.log("response: ", response);
+  //       return response.json();
+  //     })
+  //     .then((data) => console.log("CAT data: ", data));
+  // }
 
-  // console.log({ myInit });
-  // let shiftsJSON;
-
-  // fetch(`${url}/shifts`, myInit)
-  //   .then((response) => {
-  //     console.log("response: ", response);
-  //     return response.json();
-  //   })
-  //   .then((data) => console.log("SHIFT data: ", data));
-  //   .catch((error) => console.log("error is: ", error));
-
-  // BACON!!!
-  // fetch("https://baconipsum.com/api/?type=meat-and-filler&format=json")
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
-
-  // CAT api
-  // fetch("https://catfact.ninja/fact")
-  //   .then((response) => {
-  //     console.log("response: ", response);
-  //     return response.json();
-  //   })
-  //   .then((data) => console.log("CAT data: ", data));
   onSelectHandler(e) {
     let sortedSchedule;
     if (e.target.value === "first_name") {
@@ -96,8 +94,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMOUNT!");
     this.fetchScheduleData();
+    // this.testFetch();
   }
 
   render() {
