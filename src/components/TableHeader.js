@@ -1,13 +1,41 @@
 import dayNames from "../js/dayNames";
+import reducer from "../js/reducer";
 
 const TableHeader = (props) => {
-  // some stuff
-  console.log({ props });
+  // re-work data to provide how many hours are scheduled per day among all employees:
+  console.log("prepping data");
+  let allShiftsByDay = [];
+
+  let allShifts = [];
+  props.schedules.forEach((schedule) => {
+    allShifts.push(schedule.shifts);
+  });
+
+  const allShiftsConcatSorted = Array.prototype
+    .concat(...allShifts)
+    .sort((a, b) => {
+      return a.day - b.day;
+    });
+
+  for (let i = 0; i <= 6; i++) {
+    let currentDayHours = allShiftsConcatSorted.filter((shift) => {
+      return shift.day === i;
+    });
+    allShiftsByDay.push(currentDayHours);
+  }
+
+  const shiftHoursPerDay = allShiftsByDay.map((day) => {
+    const shiftHours = [];
+    day.forEach((shift) => {
+      shiftHours.push(shift.duration);
+    });
+    return shiftHours.reduce(reducer);
+  });
 
   const thCells = dayNames.map((day, index) => {
     return (
       <th key={index}>
-        {day} ({props.shiftHoursPerDay[index]}hrs)
+        {day} ({shiftHoursPerDay[index]}hrs)
       </th>
     );
   });
