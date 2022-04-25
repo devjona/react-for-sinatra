@@ -3,26 +3,18 @@ import "./App.css";
 import React, { useCallback, useEffect, useState } from "react";
 import TableHeader from "./components/TableHeader";
 import TableBody from "./components/TableBody";
-import { cheatData } from "./test-data/cheatData";
 
 const App = () => {
   const [scheduleData, setScheduleData] = useState(null);
   const userName = "Manager";
 
-  //   // CAT api
-  //   fetch("https://catfact.ninja/fact")
-  //     .then((response) => {
-  //       console.log("response: ", response);
-  //       return response.json();
-  //     })
-  //     .then((data) => console.log("CAT data: ", data));
-  // }
-
   useEffect(() => {
-    const fetchScheduleData = () => {
-      const initialSortedData = sortByFirstOrLastName(0, cheatData);
+    async function fetchScheduleData() {
+      const data = await fetch("http://localhost:4567/shifts");
+      const dataJson = await data.json();
+      const initialSortedData = sortByFirstOrLastName(0, dataJson);
       setScheduleData(initialSortedData);
-    };
+    }
     fetchScheduleData();
   }, []);
 
