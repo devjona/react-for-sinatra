@@ -11,7 +11,7 @@
 
 ## What works?
 
-- Everything except for the fact I could not, despite hours of troubleshooting, reading MDN, Stack Overflow, Sinatra docs, get around a `CORS` issue between `localhost:4567` and `localhost:3000`
+- ~~Everything except for the fact I could not, despite hours of troubleshooting, reading MDN, Stack Overflow, Sinatra docs, get around a `CORS` issue between `localhost:4567` and `localhost:3000`~~ CORS issues solved!
 - The Ruby server
   - has the required endpoint
   - will respond with JSON sorted by `last_name` or `first_name`
@@ -19,7 +19,9 @@
 
 ### Accommodations:
 
-- To mitigate this issue, I also have sorting enabled from within React app with dummy data.
+- To mitigate this issue, I also have sorting enabled from within React app ~~with dummy data.~~
+- Edit: I no longer have dummy data; I load `sort_by=first_name` and then let React sort the data it has in state
+  - I'd like to practice with a new `fetch` every time the user selects a different sort, for fun.   
 
 ## Is it a fail?
 
