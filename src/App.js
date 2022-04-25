@@ -9,10 +9,11 @@ const App = () => {
 
   useEffect(() => {
     async function fetchScheduleData() {
-      const data = await fetch("http://localhost:4567/shifts");
+      const data = await fetch(
+        "http://localhost:4567/shifts?sort_by=first_name"
+      );
       const dataJson = await data.json();
-      const initialSortedData = sortByFirstOrLastName(0, dataJson);
-      setScheduleData(initialSortedData);
+      setScheduleData(dataJson);
     }
     fetchScheduleData();
   }, []);
