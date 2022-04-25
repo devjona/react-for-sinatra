@@ -1,3 +1,4 @@
+require 'pry'
 require 'sinatra'
 
 shifts = [
@@ -121,10 +122,13 @@ end
 def sort_by_first_or_last_name(data, first_or_last)
   schedules_sorted_by_name = data
 
-  if first_or_last == 'first_name'
-    schedules_sorted_by_name.sort! { |a, b| a[:name].split(' ')[0] <=> b[:name].split(' ')[0] }
-  elsif first_or_last == 'last_name'
-    schedules_sorted_by_name.sort! { |a, b| a[:name].split(' ')[1] <=> b[:name].split(' ')[1] }
+  sort_map = {
+    first_name: 0,
+    last_name: 1
+  }
+
+  schedules_sorted_by_name.sort! do |a, b|
+    a[:name].split(' ')[sort_map[first_or_last]] <=> b[:name].split(' ')[sort_map[first_or_last]]
   end
 
   schedules_sorted_by_name
@@ -137,12 +141,9 @@ end
 get '/shifts' do
   content_type :json
 
-  if params['sort_by'] == 'first_name'
-    shifts_by_first = sort_by_first_or_last_name(shifts, params['sort_by'])
-    shifts_by_first.to_json
-  elsif params['sort_by'] == 'last_name'
-    shifts_by_last = sort_by_first_or_last_name(shifts, params['sort_by'])
-    shifts_by_last.to_json
+  if params.has_key?(:sort_by)
+    sorted_shifts = sort_by_first_or_last_name(shifts, params['sort_by'].to_sym)
+    sorted_shifts.to_json
   else
     print 'no param passed, just return'
     shifts.to_json
