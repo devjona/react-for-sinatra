@@ -1,6 +1,4 @@
-# myapp.rb
 require 'sinatra'
-require 'sinatra/cross_origin'
 
 shifts = [
   {
@@ -116,29 +114,8 @@ shifts = [
   }
 ]
 
-configure do
-  enable :cross_origin
-end
-
 before do
-  response.headers['Access-Control-Allow-Origin'] = '*'
-end
-
-set :allow_origin, :any
-set :allow_methods, %i[get post options]
-set :allow_credentials, true
-set :max_age, '1728000'
-set :expose_headers, ['Content-Type']
-
-options '*' do
-  response.headers['Allow'] = 'HEAD,GET,PUT,POST,DELETE,OPTIONS'
-
-  response.headers['Access-Control-Allow-Headers'] =
-    'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
-
-  response.headers['Access-Control-Allow-Origin'] = '*'
-
-  200
+  response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
 end
 
 def sort_by_first_or_last_name(data, first_or_last)
