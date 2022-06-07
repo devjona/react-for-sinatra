@@ -1,45 +1,45 @@
-# Homebase Team:
+# Summary:
+This was a project I had to complete as part of the interview process for an employer; it was a take-home assignment.
 
-## Server:
+## Objective:
+1. Create a React app that fetches the schedules for some workers
+2. The server must accept a query string parameter to sort the info by `first_name` or `last_name`
+3. The client must render the schedules with the proper summaries for:
+  - Hours worked per day
+  - Hours worked per week for an employee
+4. The client must also have a `select` that permits the user to change the sorting order.
+
+## Technical Notes:
+
+### Server:
 
 - Sinatra
 - Run with `ruby shifts_server.rb`
 
-## React:
+### React:
 
 - Made with Create React App; all those notes are at the end of this README.
 
-## What works?
+### What works?
 
-- ~~Everything except for the fact I could not, despite hours of troubleshooting, reading MDN, Stack Overflow, Sinatra docs, get around a `CORS` issue between `localhost:4567` and `localhost:3000`~~ CORS issues solved!
 - The Ruby server
   - has the required endpoint
   - will respond with JSON sorted by `last_name` or `first_name`
   - This is tested via `curl` and via any web browser pointing to `localhost:4567/shifts?sort_by=...`
-
-### Accommodations:
-
-- To mitigate this issue, I also have sorting enabled from within React app ~~with dummy data.~~
-- Edit: I no longer have dummy data; I load `sort_by=first_name` and then let React sort the data it has in state
-  - I'd like to practice with a new `fetch` every time the user selects a different sort, for fun.   
-
-## Is it a fail?
-
-- It's up to your team to decide. Honestly, I haven't dealt with `CORS` issues at work, so although I'm familiar with the concept, it's not one I've had to troubleshoot
-- I worked really hard on all of this, and definitely gave it my best. I'm proud of my work and enjoyed developing this.
-
-Thank you, very much!
+- The React app
+  - Displays the schedules with correct hour summaries
+  - Lets user change sorting order
 
 Cheers,
 Jona
 
 ---
 
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
