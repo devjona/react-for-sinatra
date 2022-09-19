@@ -1,3 +1,5 @@
+https://user-images.githubusercontent.com/7801456/191087380-448b63d0-9529-497e-b8c9-fa7791a75ba5.mov
+
 # Summary:
 This was a project I had to complete as part of the interview process for an employer; it was a take-home assignment.
 
