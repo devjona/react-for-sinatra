@@ -11,16 +11,32 @@ This was a project I had to complete as part of the interview process for an emp
   - Hours worked per week for an employee
 4. The client must also have a `select` that permits the user to change the sorting order.
 
-## Technical Notes:
-
-### Server:
+# Technical Notes:
+If you have the dependencies already installed locally (node, ruby, the specified gems), you can run it like this:
+## Server:
 
 - Sinatra
 - Run with `ruby shifts_server.rb`
 
-### React:
+## React:
 
 - Made with Create React App; all those notes are at the end of this README.
+
+## If you want to run it with Podman:
+```bash
+podman build -t <some:tag> -f Containerfile
+
+# For the Ruby Server:
+podman run -it -v .:/box:z -p 4567:4567 -p 3000:3000 --name <give_it_one> <some:tag> /bin/bash
+# Once inside:
+ruby sinatra_server/shifts_server.rb -o 0.0.0.0
+
+# To run the React Server:
+podman exec -it <give_it_one> /bin/bash
+# Once inside:
+yarn start 
+# Visit your localhost:3000; (the React App will ping Sinatra on 4567)
+```
 
 ### What works?
 
@@ -32,14 +48,10 @@ This was a project I had to complete as part of the interview process for an emp
   - Displays the schedules with correct hour summaries
   - Lets user change sorting order
 
-Cheers,
-Jona
 
 ---
 
-## Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Available Scripts
 
@@ -52,3 +64,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+## Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

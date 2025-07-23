@@ -1,6 +1,6 @@
 require 'pry'
 require 'sinatra'
-require './ShiftData'
+require_relative './ShiftData'
 
 before do
   response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
